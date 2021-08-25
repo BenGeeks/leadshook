@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LeadHooks by Ben Geeks</title>
+    <title>Passing Data to LeadsHook</title>
     <style>
       body {
         background-image: url('https://img-cdn.inc.com/image/upload/w_1920,h_1080,c_fill/images/panoramic/getty_1075599562_hpy86b.jpg');
@@ -23,10 +23,19 @@
     ></div>
     <script src="https://test1.leadshook.io/s/js_embed"></script>
 
-    <script type="text/javascript">
-      LH.setField('first_name', 'John');
-      LH.setField('last_name', 'Lennon');
-      LH.setField('sid', 3);
+    <script>
+      const getParams = () => {
+        console.log('ugly me!');
+        let url = window.location.href;
+        console.log(window.location.href);
+      };
+
+      getParams();
+      console.log('ugly you!');
+      LH.setField('fromWebsite_customerID', 'asdfg12345');
+      LH.setField('fromWebsite_firstName', 'Walter');
+      LH.setField('fromWebsite_lastName', 'White');
+      LH.setField('fromWebsite_source', 'Breaking Bad');
     </script>
   </body>
 </html>
