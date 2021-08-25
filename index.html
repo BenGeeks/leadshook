@@ -24,21 +24,12 @@
     <script src="https://test1.leadshook.io/s/js_embed"></script>
 
     <script>
-      const getParams = () => {
-        console.log('ugly me!');
-        let url = window.location.href;
-        let params = window.location.search;
-        console.log('url is ' + window.location.href);
-        console.log(url);
-        console.log(params);
-      };
-
-      getParams();
-      console.log('ugly you!');
-      LH.setField('fromWebsite_customerID', 'asdfg12345');
-      LH.setField('fromWebsite_firstName', 'Walter');
-      LH.setField('fromWebsite_lastName', 'White');
-      LH.setField('fromWebsite_source', 'Breaking Bad');
+      const params = window.location.search.substring(1).split('&');
+      for (let param of params) {
+        console.log(param);
+        let data = param.split('=');
+        LH.setField(data[0], data[1]);
+      }
     </script>
   </body>
 </html>
