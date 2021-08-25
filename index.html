@@ -5,15 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Passing Data to LeadsHook</title>
-    <style>
+    <!-- <style>
       body {
         background-image: url('https://img-cdn.inc.com/image/upload/w_1920,h_1080,c_fill/images/panoramic/getty_1075599562_hpy86b.jpg');
         margin: 0;
         padding: 0;
       }
-    </style>
+    </style> -->
+    <script>
+      document.cookie = 'firstName=Christopher;path=/;domain=example.com;secure';
+    </script>
   </head>
   <body>
+    <!-- <script>
+      // document.cookie = fromWebsite_customerID = qwerty123;
+      // document.cookie = fromWebsite_firstName = John;
+      // document.cookie = fromWebsite_lastName = Connor;
+      // document.cookie = fromWebsite_source = Terminator;
+      // function setCookie() {
+      //   var date = new Date('Februari 10, 2013');
+      //   var dateString = date.toGMTString();
+      //   var cookieString = 'fromWebsite_source=Terminator' + dateString;
+      //   document.cookie =
+      //     'fromWebsite_customerID=qwerty123;fromWebsite_firstName=John;fromWebsite_lastName=Connor;fromWebsite_source=Terminator';
+      // }
+    </script> -->
     <div
       class="quiz-container"
       style="text-align: center"
@@ -30,6 +46,13 @@
         let data = param.split('=');
         LH.setField(data[0], data[1]);
       }
+    </script>
+
+    <script>
+      document.cookie = 'firstName=Christopher;path=/;domain=example.com;secure';
+      // document.cookie =
+      //   'fromWebsite_customerID=qwerty123;fromWebsite_firstName=John;fromWebsite_lastName=Connor;fromWebsite_source=Terminator;path=/';
+      console.log('Cookies: ', document.cookie);
     </script>
   </body>
 </html>
