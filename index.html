@@ -12,20 +12,6 @@
         padding: 0;
       }
     </style> -->
-    <script>
-      function setCookie(name, value, days) {
-        console.log('setCookie has been called!');
-        var expires = '';
-        if (days) {
-          var date = new Date();
-          date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-          expires = '; expires=' + date.toUTCString();
-        }
-        document.cookie = name + '=' + (value || '') + expires + '; path=/';
-      }
-
-      setCookie('name', 'Ben', 7);
-    </script>
   </head>
   <body>
     <div
@@ -45,6 +31,20 @@
         LH.setField(data[0], data[1]);
       }
     </script>
+    <script>
+      function setCookie(name, value, days) {
+        console.log('setCookie has been called!');
+        var expires = '';
+        if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+          expires = '; expires=' + date.toUTCString();
+        }
+        document.cookie = name + '=' + (value || '') + expires + '; path=/';
+      }
+
+      setCookie('name', 'Ben', 7);
+    </script>
 
     <script>
       function getCookie(name) {
@@ -54,7 +54,7 @@
         if (parts.length === 2) return parts.pop().split(';').shift();
       }
 
-      getCookie('_fbp');
+      getCookie('name');
     </script>
   </body>
 </html>
