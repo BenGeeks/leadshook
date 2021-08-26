@@ -26,7 +26,6 @@
     <!-- Ben set cookie code -->
     <script>
       function setCookie(name, value, days) {
-        console.log('setCookie has been called!');
         var expires = '';
         if (days) {
           var date = new Date();
@@ -45,23 +44,16 @@
     <script>
       function getCookie(name) {
         const value = document.cookie;
-        console.log('Cookie: ', value);
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
       }
 
-      let firstName = getCookie('_firstName');
-      let lastName = getCookie('_lastName');
-      let source = getCookie('_source');
-      let fbp = getCookie('_fbp');
-      console.log(firstName);
-      console.log(lastName);
-      console.log(source);
-      console.log(fbp);
-      LH.setField('cookieFromSite_firstName', firstName);
-      LH.setField('cookieFromSite_lastName', lastName);
-      LH.setField('cookieFromSite_source', source);
-      LH.setField('cookieFromSite_fbp', fbp);
+      setTimeout(() => {
+        LH.setField('cookieFromSite_firstName', getCookie('_firstName'));
+        LH.setField('cookieFromSite_lastName', getCookie('_lastName'));
+        LH.setField('cookieFromSite_source', getCookie('_source'));
+        LH.setField('cookieFromSite_fbp', getCookie('_fbp'));
+      }, 1000);
     </script>
   </body>
 </html>
