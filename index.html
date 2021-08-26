@@ -23,6 +23,7 @@
     ></div>
     <script src="https://test1.leadshook.io/s/js_embed"></script>
 
+    <!-- Ben set cookie code -->
     <script>
       function setCookie(name, value, days) {
         console.log('setCookie has been called!');
@@ -40,6 +41,7 @@
       setCookie('_lastName', 'Reese', 7);
       setCookie('_source', 'Terminator', 7);
     </script>
+    <!-- Facebook Pixel Code -->
 
     <script>
       function getCookie(name) {
@@ -48,6 +50,9 @@
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
       }
+
+      let firstName = getCookie('_firstName');
+      console.log(firstName);
       LH.setField('cookieFromSite_firstName', getCookie('_firstName'));
       LH.setField('cookieFromSite_lastName', getCookie('_lastName'));
       LH.setField('cookieFromSite_source', getCookie('_source'));
