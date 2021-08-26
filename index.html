@@ -12,24 +12,8 @@
         padding: 0;
       }
     </style> -->
-    <script>
-      document.cookie = 'firstName=Christopher;path=/;domain=example.com;secure';
-    </script>
   </head>
   <body>
-    <!-- <script>
-      // document.cookie = fromWebsite_customerID = qwerty123;
-      // document.cookie = fromWebsite_firstName = John;
-      // document.cookie = fromWebsite_lastName = Connor;
-      // document.cookie = fromWebsite_source = Terminator;
-      // function setCookie() {
-      //   var date = new Date('Februari 10, 2013');
-      //   var dateString = date.toGMTString();
-      //   var cookieString = 'fromWebsite_source=Terminator' + dateString;
-      //   document.cookie =
-      //     'fromWebsite_customerID=qwerty123;fromWebsite_firstName=John;fromWebsite_lastName=Connor;fromWebsite_source=Terminator';
-      // }
-    </script> -->
     <div
       class="quiz-container"
       style="text-align: center"
@@ -49,10 +33,14 @@
     </script>
 
     <script>
-      document.cookie = 'firstName=Christopher;path=/;domain=example.com;secure';
-      // document.cookie =
-      //   'fromWebsite_customerID=qwerty123;fromWebsite_firstName=John;fromWebsite_lastName=Connor;fromWebsite_source=Terminator;path=/';
-      console.log('Cookies: ', document.cookie);
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        console.log('Cookie: ', value);
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+      }
+
+      getCookie('_fbp');
     </script>
   </body>
 </html>
