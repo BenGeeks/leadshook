@@ -35,7 +35,10 @@
         document.cookie = name + '=' + (value || '') + expires + '; path=/';
       }
 
-      setCookie('MySiteCookie', 'thisIsACookieFromMyWebsite', 7);
+      setCookie('_fbp', 'fb.1.1624369180421.209276319', 7);
+      setCookie('_firstName', 'Kyle', 7);
+      setCookie('_lastName', 'Reese', 7);
+      setCookie('_source', 'Terminator', 7);
     </script>
 
     <script>
@@ -45,7 +48,10 @@
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
       }
-      LH.setField('cookieFromSite', getCookie('MySiteCookie'));
+      LH.setField('cookieFromSite_firstName', getCookie('_firstName'));
+      LH.setField('cookieFromSite_lastName', getCookie('_lastName'));
+      LH.setField('cookieFromSite_source', getCookie('_source'));
+      LH.setField('cookieFromSite_fbp', getCookie('_fbp'));
     </script>
   </body>
 </html>
