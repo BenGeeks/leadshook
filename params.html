@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Passing Data to LeadsHook</title>
+  </head>
+  <body>
+    <div
+      class="quiz-container"
+      style="text-align: center"
+      data-quiz="meCozlPI86DnepvQB6bq7D83bwt6aEiXHoHYAU69"
+      data-offset="0"
+      data-autoscroll="yes"
+    ></div>
+    <script src="https://test1.leadshook.io/s/js_embed"></script>
+
+    <script>
+      const params = window.location.search.substring(1).split('&');
+      for (let param of params) {
+        console.log(param);
+        let data = param.split('=');
+        LH.setField(data[0], data[1]);
+      }
+    </script>
+  </body>
+</html>

@@ -24,14 +24,6 @@
     <script src="https://test1.leadshook.io/s/js_embed"></script>
 
     <script>
-      const params = window.location.search.substring(1).split('&');
-      for (let param of params) {
-        console.log(param);
-        let data = param.split('=');
-        LH.setField(data[0], data[1]);
-      }
-    </script>
-    <script>
       function setCookie(name, value, days) {
         console.log('setCookie has been called!');
         var expires = '';
@@ -43,18 +35,17 @@
         document.cookie = name + '=' + (value || '') + expires + '; path=/';
       }
 
-      setCookie('name', 'Ben', 7);
+      setCookie('MySiteCookie', 'thisIsACookieFromMyWebsite', 7);
     </script>
 
     <script>
       function getCookie(name) {
-        const value = `; ${document.cookie}`;
+        const value = document.cookie;
         console.log('Cookie: ', value);
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
       }
-
-      getCookie('name');
+      LH.setField('cookieFromSite', getCookie('MySiteCookie'));
     </script>
   </body>
 </html>
