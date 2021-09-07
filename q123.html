@@ -1,0 +1,41 @@
+<script>
+  const messageKey = 'ZR4wUggoGkXjRqlcTrYKFFXpNGyVcXJwmYl0aBw3';
+  let messageID, confirmed;
+
+  const sendMessage = (eventData) => {
+    let sendInterval = setInterval(() => {
+      confirmed ? clearInterval(sendInterval) : parent.postMessage(eventData, '*');
+    }, 1000);
+  };
+
+  const ga4 = (eventName, data) => {
+    confirmed = false;
+    messageID = Math.floor(Math.random() * 100000000);
+    const eventData = { messageKey, messageID, eventName, eventData: data };
+    sendMessage(eventData);
+  };
+
+  const receiveMessage = (message) => message.data === messageID && (confirmed = true);
+  window.addEventListener('message', receiveMessage, false);
+</script>
+
+<script>
+  var dataLayer = window.dataLayer || (window.dataLayer = []);
+
+  function sendResponse(messageID) {
+    event.source.postMessage(messageID, '*');
+  }
+
+  function receiveMessage(message) {
+    if (message.data.messageKey === 'ZR4wUggoGkXjRqlcTrYKFFXpNGyVcXJwmYl0aBw3') {
+      console.log('Event from LeadsHook received: ', message.data.eventName);
+      sendResponse(message.data.messageID);
+      dataLayer.push({
+        event: 'LH - ' + message.data.eventName,
+        leadsHook_data: message.data.eventData,
+      });
+    }
+  }
+
+  window.addEventListener('message', receiveMessage, false);
+</script>
