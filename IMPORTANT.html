@@ -1,0 +1,92 @@
+<script>
+  const messageKey = 'ZR4wUggoGkXjRqlcTrYKFFXpNGyVcXJwmYl0aBw3';
+  let messageID, confirmed;
+  let parentGtmEnabled = true;
+
+  const sendMessage = (eventData) => {
+    let sendInterval = setInterval(() => {
+      confirmed ? clearInterval(sendInterval) : parent.postMessage(eventData, '*');
+    }, 1000);
+  };
+
+  const ga4 = (eventName, data) => {
+    confirmed = false;
+    messageID = Math.floor(Math.random() * 100000000);
+    const eventData = { messageKey, messageID, eventName, eventData: data };
+    parentGtmEnabled && sendMessage(eventData);
+  };
+
+  window.addEventListener('message', (message) => message.data === messageID && (confirmed = true), false);
+</script>
+
+<script>
+  var dataLayer = window.dataLayer || (window.dataLayer = []);
+
+  function sendResponse(messageID) {
+    event.source.postMessage(messageID, '*');
+  }
+
+  function receiveMessage(message) {
+    if (message.data.messageKey === 'ZR4wUggoGkXjRqlcTrYKFFXpNGyVcXJwmYl0aBw3') {
+      console.log('Event from LeadsHook received: ', message.data.eventName);
+      sendResponse(message.data.messageID);
+      dataLayer.push({
+        event: 'LH - ' + message.data.eventName,
+        leadsHook_data: message.data.eventData,
+      });
+    }
+  }
+
+  window.addEventListener('message', receiveMessage, false);
+</script>
+
+<script>
+  let leadInfo = {
+    leadID: '{lead_id}',
+    leadToken: '{lead_token}',
+    createdOn: '{lead_created}',
+    userAgent: '{_c_useragent}',
+  };
+  let eventInfo = {
+    eventID: '{_c_eventid}',
+    eventTime: '{_c_eventtime}',
+    eventURL: '{_c_eventurl}',
+  };
+  let decisionTreeInfo = {
+    embedURL: '{_c_embedurl}',
+    decisionTree: '{_c_dt}',
+    decisionTreeVersion: '{_c_dt_ver}',
+  };
+  console.log(leadInfo);
+  console.log(eventInfo);
+  console.log(decisionTreeInfo);
+  ga4('first_visit', { leadInfo, eventInfo, decisionTreeInfo });
+</script>
+
+<script>
+  let eventName = '{_c_identifier}' ? 'view_{_c_identifier}' : 'page_view';
+  ga4(eventName, { [eventName]: { nodeTitle: '{_c_node}' } });
+</script>
+
+<script>
+  let eventName = '{_c_identifier}' ? 'q&a_{_c_identifier}' : 'q&a_event';
+  ga4(eventName, { [eventName]: { question: '{_c_question}', answer: '{_c_answer}' } });
+</script>
+
+<script>
+  setTimeout(() => {
+    let eventName = '{_c_identifier}' ? 'form_{_c_identifier}' : 'form_event';
+    let formGroup = document.getElementsByClassName('form-group');
+    let btn = document.getElementsByClassName('btn')[0];
+    const getData = () => {
+      let formData = { nodeTitle: '{_c_node}' };
+      for (let i = 0; i < formGroup.length; i++) {
+        let key = formGroup[i].getElementsByTagName('LABEL')[0].firstElementChild.innerHTML;
+        let value = formGroup[i].getElementsByTagName('DIV')[0].getElementsByTagName('INPUT')[0].value;
+        formData[key] = value;
+      }
+      return formData;
+    };
+    btn.addEventListener('click', () => ga4(eventName, { [eventName]: getData() }));
+  }, 1000);
+</script>
