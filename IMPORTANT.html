@@ -1,3 +1,4 @@
+<!-- MAIN -->
 <script>
   const messageKey = 'ZR4wUggoGkXjRqlcTrYKFFXpNGyVcXJwmYl0aBw3';
   let messageID, confirmed;
@@ -19,6 +20,7 @@
   window.addEventListener('message', (message) => message.data === messageID && (confirmed = true), false);
 </script>
 
+<!-- GTM GA4 event listener -->
 <script>
   var dataLayer = window.dataLayer || (window.dataLayer = []);
 
@@ -31,7 +33,7 @@
       console.log('Event from LeadsHook received: ', message.data.eventName);
       sendResponse(message.data.messageID);
       dataLayer.push({
-        event: 'LH - ' + message.data.eventName,
+        event: 'LH_' + message.data.eventName,
         leadsHook_data: message.data.eventData,
       });
     }
@@ -40,6 +42,7 @@
   window.addEventListener('message', receiveMessage, false);
 </script>
 
+<!-- First Visit -->
 <script>
   let leadInfo = {
     leadID: '{lead_id}',
@@ -63,23 +66,33 @@
   ga4('first_visit', { leadInfo, eventInfo, decisionTreeInfo });
 </script>
 
+<!-- Page View -->
 <script>
   let eventName = '{_c_identifier}' ? 'view_{_c_identifier}' : 'page_view';
-  ga4(eventName, { [eventName]: { nodeTitle: '{_c_node}' } });
+  ga4(eventName, { [eventName]: { eventID: '{_c_eventid}', eventTime: '{_c_eventtime}', nodeTitle: '{_c_node}' } });
 </script>
 
+<!-- Question and Answer -->
 <script>
   let eventName = '{_c_identifier}' ? 'q&a_{_c_identifier}' : 'q&a_event';
-  ga4(eventName, { [eventName]: { question: '{_c_question}', answer: '{_c_answer}' } });
+  ga4(eventName, {
+    [eventName]: {
+      eventID: '{_c_eventid}',
+      eventTime: '{_c_eventtime}',
+      eventQuestion: '{_c_question}',
+      eventAnswer: '{_c_answer}',
+    },
+  });
 </script>
 
+<!-- Form Node -->
 <script>
   setTimeout(() => {
     let eventName = '{_c_identifier}' ? 'form_{_c_identifier}' : 'form_event';
     let formGroup = document.getElementsByClassName('form-group');
     let btn = document.getElementsByClassName('btn')[0];
     const getData = () => {
-      let formData = { nodeTitle: '{_c_node}' };
+      let formData = { eventID: '{_c_eventid}', eventTime: '{_c_eventtime}', nodeTitle: '{_c_node}' };
       for (let i = 0; i < formGroup.length; i++) {
         let key = formGroup[i].getElementsByTagName('LABEL')[0].firstElementChild.innerHTML;
         let value = formGroup[i].getElementsByTagName('DIV')[0].getElementsByTagName('INPUT')[0].value;
@@ -89,4 +102,58 @@
     };
     btn.addEventListener('click', () => ga4(eventName, { [eventName]: getData() }));
   }, 1000);
+</script>
+
+<!-- GTM UA event listener -->
+<script>
+  var dataLayer = window.dataLayer || (window.dataLayer = []);
+
+  function sendResponse(messageID) {
+    event.source.postMessage(messageID, '*');
+  }
+
+  function receiveMessage(message) {
+    if (message.data.messageKey === 'ZR4wUggoGkXjRqlcTrYKFFXpNGyVcXJwmYl0aBw3') {
+      sendResponse(message.data.messageID);
+      console.log('Message: ', message);
+
+      if (message.data.eventName.includes('view')) {
+        dataLayer.push({
+          event: 'LeadsHook event',
+          category: 'page_view',
+          action: message.data.eventData.nodeTitle,
+          label: message.data.eventName,
+          value: '',
+          eventTime: message.data.eventData.eventTime,
+          eventID: message.data.eventData.eventID,
+        });
+      }
+
+      if (message.data.eventName.includes('q&a')) {
+        dataLayer.push({
+          event: 'LeadsHook event',
+          category: 'Q&A engagement',
+          action: message.data.eventData.nodeTitle,
+          label: message.data.eventData.eventQuestion,
+          value: message.data.eventData.eventAnswer,
+          eventTime: message.data.eventData.eventTime,
+          eventID: message.data.eventData.eventID,
+        });
+      }
+
+      if (message.data.eventName.includes('form')) {
+        dataLayer.push({
+          event: 'LeadsHook event',
+          category: 'Form engagement',
+          action: message.data.eventData.nodeTitle,
+          label: message.data.eventName,
+          value: message.data.eventData,
+          eventTime: message.data.eventData.eventTime,
+          eventID: message.data.eventData.eventID,
+        });
+      }
+    }
+  }
+
+  window.addEventListener('message', receiveMessage, false);
 </script>
