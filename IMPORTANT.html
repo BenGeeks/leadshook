@@ -68,31 +68,33 @@
 
 <!-- Page View -->
 <script>
-  let eventName = '{_c_identifier}' ? 'view_{_c_identifier}' : 'page_view';
-  ga4(eventName, { [eventName]: { eventID: '{_c_eventid}', eventTime: '{_c_eventtime}', nodeTitle: '{_c_node}' } });
+  ga4('page_view', {
+    eventID: '{_c_eventid}',
+    eventTime: '{_c_eventtime}',
+    nodeTitle: '{_c_node}',
+    nodeIdentifier: '{_c_identifier}',
+  });
 </script>
 
 <!-- Question and Answer -->
 <script>
-  let eventName = '{_c_identifier}' ? 'q&a_{_c_identifier}' : 'q&a_event';
-  ga4(eventName, {
-    [eventName]: {
-      eventID: '{_c_eventid}',
-      eventTime: '{_c_eventtime}',
-      eventQuestion: '{_c_question}',
-      eventAnswer: '{_c_answer}',
-    },
+  ga4('q&a_event', {
+    eventID: '{_c_eventid}',
+    eventTime: '{_c_eventtime}',
+    nodeTitle: '{_c_node}',
+    nodeIdentifier: '{_c_identifier}',
+    eventQuestion: '{_c_question}',
+    eventAnswer: '{_c_answer}',
   });
 </script>
 
 <!-- Form Node -->
 <script>
   setTimeout(() => {
-    let eventName = '{_c_identifier}' ? 'form_{_c_identifier}' : 'form_event';
     let formGroup = document.getElementsByClassName('form-group');
     let btn = document.getElementsByClassName('btn')[0];
     const getData = () => {
-      let formData = { eventID: '{_c_eventid}', eventTime: '{_c_eventtime}', nodeTitle: '{_c_node}' };
+      let formData = {};
       for (let i = 0; i < formGroup.length; i++) {
         let key = formGroup[i].getElementsByTagName('LABEL')[0].firstElementChild.innerHTML;
         let value = formGroup[i].getElementsByTagName('DIV')[0].getElementsByTagName('INPUT')[0].value;
@@ -100,7 +102,15 @@
       }
       return formData;
     };
-    btn.addEventListener('click', () => ga4(eventName, { [eventName]: getData() }));
+    btn.addEventListener('click', () =>
+      ga4('form_event', {
+        eventID: '{_c_eventid}',
+        eventTime: '{_c_eventtime}',
+        nodeTitle: '{_c_node}',
+        nodeIdentifier: '{_c_identifier}',
+        formData: getData(),
+      })
+    );
   }, 1000);
 </script>
 
@@ -115,41 +125,60 @@
   function receiveMessage(message) {
     if (message.data.messageKey === 'ZR4wUggoGkXjRqlcTrYKFFXpNGyVcXJwmYl0aBw3') {
       sendResponse(message.data.messageID);
-      console.log('Message: ', message);
+
+      if (message.data.eventName.includes('first_visit')) {
+        dataLayer.push({
+          event: 'LH First Visit',
+          LH_data: {
+            category: 'LH_first_visit',
+            action: 'LH_leadID_' + message.data.eventData.leadInfo.leadID,
+            label: 'LH_leadToken_' + message.data.eventData.leadInfo.leadToken,
+            value: '',
+            eventTime: message.data.eventData.eventInfo.eventTime,
+            eventID: message.data.eventData.eventInfo.eventID,
+          },
+        });
+      }
 
       if (message.data.eventName.includes('view')) {
         dataLayer.push({
-          event: 'LeadsHook event',
-          category: 'page_view',
-          action: message.data.eventData.nodeTitle,
-          label: message.data.eventName,
-          value: '',
-          eventTime: message.data.eventData.eventTime,
-          eventID: message.data.eventData.eventID,
+          event: 'LH Page View',
+          LH_data: {
+            category: 'LH_page_view',
+            action: message.data.eventData.nodeTitle,
+            label: message.data.eventData.nodeIdentifier,
+            value: '',
+            eventTime: message.data.eventData.eventTime,
+            eventID: message.data.eventData.eventID,
+          },
         });
       }
 
       if (message.data.eventName.includes('q&a')) {
         dataLayer.push({
-          event: 'LeadsHook event',
-          category: 'Q&A engagement',
-          action: message.data.eventData.nodeTitle,
-          label: message.data.eventData.eventQuestion,
-          value: message.data.eventData.eventAnswer,
-          eventTime: message.data.eventData.eventTime,
-          eventID: message.data.eventData.eventID,
+          event: 'LH Q&A Event',
+          LH_data: {
+            category: 'LH_q&a_engagement',
+            action: message.data.eventData.nodeTitle,
+            label: message.data.eventData.eventQuestion,
+            value: message.data.eventData.eventAnswer,
+            eventTime: message.data.eventData.eventTime,
+            eventID: message.data.eventData.eventID,
+          },
         });
       }
 
       if (message.data.eventName.includes('form')) {
         dataLayer.push({
-          event: 'LeadsHook event',
-          category: 'Form engagement',
-          action: message.data.eventData.nodeTitle,
-          label: message.data.eventName,
-          value: message.data.eventData,
-          eventTime: message.data.eventData.eventTime,
-          eventID: message.data.eventData.eventID,
+          event: 'LH Form Event',
+          LH_data: {
+            category: 'LH_form_engagement',
+            action: message.data.eventData.nodeTitle,
+            label: message.data.eventName,
+            value: message.data.eventData.formData,
+            eventTime: message.data.eventData.eventTime,
+            eventID: message.data.eventData.eventID,
+          },
         });
       }
     }
