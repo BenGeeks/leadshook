@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+      }
+      .flex_column {
+        display: flex;
+        flex-direction: column;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+      .flex_row {
+        display: flex;
+        flex-direction: row;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+      .section_padding {
+        padding: 2rem 1.5rem;
+      }
+      .flex {
+        display: flex;
+      }
+      input[type='radio']:checked + label {
+        background-color: #0196e375;
+        color: white;
+      }
+      .multi_button {
+        border: 1px solid #32bdff;
+        border-radius: 3px;
+        display: inline-block;
+        font-size: 16px;
+        padding: 20px 55px;
+        cursor: pointer;
+        color: #525252;
+        transition: all 0.2s ease-in-out 0s;
+        -webkit-transition: all 0.2s ease-in-out 0s;
+        -moz-transition: all 0.2s ease-in-out 0s;
+        margin-right: 1rem;
+      }
+      .multi_input_hidden {
+        display: none;
+      }
+
+      .submitBtn {
+        background-color: #0070ba;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 30px;
+        font-weight: 400;
+        padding: 16px 0;
+        max-width: 575px;
+        width: 100%;
+        border: 0;
+        cursor: pointer;
+        border-bottom: 4px solid #135ec5;
+        transition: all 0.2s ease-in-out 0s;
+        -webkit-transition: all 0.2s ease-in-out 0s;
+        -moz-transition: all 0.2s ease-in-out 0s;
+        background: #ff6c00 !important;
+        font-weight: 700 !important;
+        border-bottom: 4px solid #ce5700 !important;
+        margin-bottom: 2rem;
+      }
+
+      .coverRequired1 {
+        background: url(https://cleverkeith.com/img/coverRequired1_b.png) 18px 13px no-repeat;
+      }
+
+      input[type='radio']:checked + label.coverRequired1 {
+        background-image: url(https://cleverkeith.com/img/coverRequired1_w.png);
+        background-repeat: no-repeat;
+        background-position: 18px 8px;
+      }
+
+      .coverRequired2 {
+        background: url(https://cleverkeith.com/img/coverRequired2_b.png) 18px 13px no-repeat;
+      }
+
+      input[type='radio']:checked + label.coverRequired2 {
+        background-image: url(https://cleverkeith.com/img/coverRequired2_w.png);
+        background-repeat: no-repeat;
+        background-position: 18px 8px;
+      }
+
+      .insuranceType1 {
+        background: url(https://cleverkeith.com/img/life_insurance_only.png) 8px 8px no-repeat;
+      }
+
+      .insuranceType2 {
+        background: url(https://cleverkeith.com/img/critical_care.png) 8px 13px no-repeat;
+        background-size: 40px;
+      }
+
+      .insuranceType3 {
+        background: url(https://cleverkeith.com/img/whole_of_life.png) 8px 9px no-repeat;
+        background-size: 40px;
+      }
+
+      .smoker1 {
+        background: url(https://cleverkeith.com/img/smoking_no.png) 8px 11px no-repeat;
+        background-size: 40px;
+      }
+
+      .smoker2 {
+        background: url(https://cleverkeith.com/img/smoking_yes.png) 8px 11px no-repeat;
+        background-size: 40px;
+      }
+
+      @media (max-width: 768px) {
+        .flex {
+          display: block;
+        }
+        label {
+          font-weight: 400;
+          width: 100%;
+          text-align: center;
+        }
+        .flex_row {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="flex_column section_padding">
+        <h4 class="questionTitle">Cover required for:</h4>
+        <div class="flex">
+          <div>
+            <input type="radio" id="coverRequired1" name="quoteUser" value="Me" class="multi_input_hidden" required />
+            <label for="coverRequired1" class="multi_button coverRequired1">Me</label><br />
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="coverRequired2"
+              name="quoteUser"
+              value="Me & My Partner"
+              class="multi_input_hidden"
+            />
+            <label for="coverRequired2" class="multi_button coverRequired2">Me & My Partner</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex_column">
+        <h4 class="questionTitle">Type of Insurance</h4>
+        <div class="flex">
+          <div>
+            <input
+              type="radio"
+              id="insuranceType1"
+              name="insurance_type"
+              value="Life Insurance"
+              class="multi_input_hidden"
+            />
+            <label for="insuranceType1" class="multi_button insuranceType1">Life Insurance</label><br />
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="insuranceType2"
+              name="insurance_type"
+              value="Life Insurance Critical Illness"
+              class="multi_input_hidden"
+            />
+            <label for="insuranceType2" class="multi_button insuranceType2">Life Insurance + Critical Illness</label
+            ><br />
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="insuranceType3"
+              name="insurance_type"
+              value="Whole of Life"
+              class="multi_input_hidden"
+            />
+            <label for="insuranceType3" class="multi_button insuranceType3">Whole of Life</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex_column section_padding">
+        <h4 class="questionTitle">Do you smoke?</h4>
+        <div class="flex">
+          <div>
+            <input type="radio" id="smoker1" name="smoking" value="No" class="multi_input_hidden" />
+            <label for="smoker1" class="multi_button smoker1">No</label><br />
+          </div>
+          <div>
+            <input type="radio" id="smoker2" name="smoking" value="Yes" class="multi_input_hidden" />
+            <label for="smoker2" class="multi_button smoker2">Yes</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex_column">
+        <h4 class="questionTitle">Amount of Cover</h4>
+        <div class="flex">
+          <div>
+            <input type="radio" id="coverAmount1" name="cover_amount" value="100000" class="multi_input_hidden" />
+            <label for="coverAmount1" class="multi_button">£10,000 - £100,000</label><br />
+          </div>
+          <div>
+            <input type="radio" id="coverAmount2" name="cover_amount" value="250000" class="multi_input_hidden" />
+            <label for="coverAmount2" class="multi_button">£100,000 - £250,000</label><br />
+          </div>
+          <div>
+            <input type="radio" id="coverAmount3" name="cover_amount" value="250001" class="multi_input_hidden" />
+            <label for="coverAmount3" class="multi_button">£250,000+</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex_column section_padding">
+        <h4 class="questionTitle">Cover Period (Years)</h4>
+        <div class="flex">
+          <div>
+            <input type="radio" id="coverLength1" name="cover_length" value="10" class="multi_input_hidden" />
+            <label for="coverLength1" class="multi_button">1 - 10</label><br />
+          </div>
+          <div>
+            <input type="radio" id="coverLength2" name="cover_length" value="25" class="multi_input_hidden" />
+            <label for="coverLength2" class="multi_button">10 - 25</label><br />
+          </div>
+          <div>
+            <input type="radio" id="coverLength3" name="cover_length" value="26" class="multi_input_hidden" />
+            <label for="coverLength3" class="multi_button">25+</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex_column">
+        <h4 class="questionTitle">Date of Birth</h4>
+        <div>
+          <input type="input" id="dob_day" name="day_dd" />
+          <input type="input" id="dob_month" name="month_dd" />
+          <input type="input" id="dob_year" name="year_dd" />
+
+          <select name="year_dd" id="year_dd">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex_row section_padding">
+        <div>
+          <h4 class="questionTitle">Title</h4>
+          <select name="title_dd" id="title_dd">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+          <!-- <input type="input" id="title" name="title_dd"> -->
+        </div>
+
+        <div>
+          <h4 class="questionTitle">First Name</h4>
+          <input type="input" id="first_name" name="first_name" />
+        </div>
+
+        <div>
+          <h4 class="questionTitle">Last Name</h4>
+          <input type="input" id="last_name" name="last_name" />
+        </div>
+      </div>
+
+      <div class="flex_row">
+        <div>
+          <h4 class="questionTitle">Email Address</h4>
+          <input type="input" id="email" name="email" />
+        </div>
+
+        <div>
+          <h4 class="questionTitle">Contact Number</h4>
+          <input type="input" id="contact_number" name="contact_number" />
+        </div>
+
+        <div>
+          <h4 class="questionTitle">Postcode</h4>
+          <input type="input" id="post_code" name="post_code" />
+        </div>
+      </div>
+
+      <div class="flex_row section_padding" style="justify-content: center">
+        <button type="submit" class="submitBtn">Compare Quotes Now >></button>
+      </div>
+    </div>
+  </body>
+</html>

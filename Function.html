@@ -1,0 +1,74 @@
+<div class="card-body">
+  <div class="page-header"><h3>Functions</h3></div>
+  <!-- ngInclude: 'app/settings/functions/partials/functions-table.html' -->
+  <div ng-include="'app/settings/functions/partials/functions-table.html'" class="ng-scope">
+    <table class="table table-striped dt-table ng-scope">
+      <thead>
+        <tr>
+          <th class="w140">Function Name</th>
+          <th class="w180">Description</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DT.setField</td>
+          <td>Set custom field value.</td>
+          <td><code>DT.setField('first_name', 'John')</code></td>
+        </tr>
+        <tr>
+          <td>DT.grabCookie</td>
+          <td>Get cookie value.</td>
+          <td>
+            <code>DT.grabCookie('fbc', '_fbc')</code><br />Now field <code>{fbc}</code> should have value from
+            <code>_fbc</code> cookie. E.g. <code>fb.1.1554763741205.AbCdEfGhIjKlMnOpQrStUvWxYz1234567890</code>
+          </td>
+        </tr>
+        <tr>
+          <td>DT.setCookie</td>
+          <td>Set cookie.</td>
+          <td>
+            <code>DT.setCookie('lead_id', '{lead_id}', 30)</code><br />Set cookie with name <code>lead_id</code> and use
+            <code>{lead_id}</code> as its value with expiry 30 days from now. Please note that expiry days is
+            <em>optional</em>.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div ng-include="'app/settings/functions/partials/functions-table.html'" class="ng-scope">
+    <table class="table table-striped dt-table ng-scope">
+      <thead>
+        <tr>
+          <th class="w140">Function Name</th>
+          <th class="w180">Description</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DT.setField</td>
+          <td>Set custom field value.</td>
+          <td><code>DT.setField('first_name', 'John')</code></td>
+        </tr>
+        <tr>
+          <td>DT.grabCookie</td>
+          <td>Get cookie value.</td>
+          <td>
+            <code>DT.grabCookie('fbc', '_fbc')</code><br />Now field <code>{fbc}</code> should have value from
+            <code>_fbc</code> cookie. E.g. <code>fb.1.1554763741205.AbCdEfGhIjKlMnOpQrStUvWxYz1234567890</code>
+          </td>
+        </tr>
+        <tr>
+          <td>DT.setCookie</td>
+          <td>Set cookie.</td>
+          <td>
+            <code>DT.setCookie('lead_id', '{lead_id}', 30)</code><br />Set cookie with name <code>lead_id</code> and use
+            <code>{lead_id}</code> as its value with expiry 30 days from now. Please note that expiry days is
+            <em>optional</em>.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

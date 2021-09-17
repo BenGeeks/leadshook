@@ -68,17 +68,21 @@
 
 <!-- Page View -->
 <script>
-  ga4('page_view', {
+  let eventName = '{_c_identifier}' ? 'view_{_c_identifier}' : 'page_view';
+  ga4(eventName, {
     eventID: '{_c_eventid}',
     eventTime: '{_c_eventtime}',
     nodeTitle: '{_c_node}',
     nodeIdentifier: '{_c_identifier}',
+    eventQuestion: '{_c_question}',
+    eventAnswer: '{_c_answer}',
   });
 </script>
 
 <!-- Question and Answer -->
 <script>
-  ga4('q&a_event', {
+  let eventName = '{_c_identifier}' ? 'q&a_{_c_identifier}' : 'q&a_event';
+  ga4(eventName, {
     eventID: '{_c_eventid}',
     eventTime: '{_c_eventtime}',
     nodeTitle: '{_c_node}',
@@ -91,6 +95,7 @@
 <!-- Form Node -->
 <script>
   setTimeout(() => {
+    let eventName = '{_c_identifier}' ? 'form_{_c_identifier}' : 'form_event';
     let formGroup = document.getElementsByClassName('form-group');
     let btn = document.getElementsByClassName('btn')[0];
     const getData = () => {
@@ -103,7 +108,7 @@
       return formData;
     };
     btn.addEventListener('click', () =>
-      ga4('form_event', {
+      ga4(eventName, {
         eventID: '{_c_eventid}',
         eventTime: '{_c_eventtime}',
         nodeTitle: '{_c_node}',
@@ -185,4 +190,26 @@
   }
 
   window.addEventListener('message', receiveMessage, false);
+</script>
+
+<!-- Form Node -->
+<script>
+  let eventName = '{_c_identifier}' ? 'form_{_c_identifier}' : 'form_event';
+  ga4(eventName, {
+    eventID: '{_c_eventid}',
+    eventTime: '{_c_eventtime}',
+    nodeTitle: '{_c_node}',
+    nodeIdentifier: '{_c_identifier}',
+    formData: '{form_data}',
+  });
+</script>
+
+<script>
+  setTimeout(() => {
+    let formGroup = document.getElementsByClassName('form-group');
+    for (let i = 0; i < formGroup.length; i++) {
+      let target = formGroup[i].getElementsByTagName('DIV')[0].getElementsByTagName('INPUT')[0];
+      if (target.name === 'first_name') target.setAttribute('autocomplete', 'on');
+    }
+  }, 1000);
 </script>

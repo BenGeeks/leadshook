@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countdown Timer</title>
+    <style type="text/css">
+      #daysTxt,
+      #hoursTxt,
+      #minutesTxt,
+      #secondsTxt {
+        display: inline-block;
+        background-color: #ff1493;
+        border-radius: 10px;
+        color: white;
+        width: auto;
+        min-width: 70px;
+        margin-left: 10px;
+        padding: 14px;
+        font-size: 27px;
+      }
+      .holder {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // Set the date we're counting down to
+      var MinutesLater = new Date(); //Now
+      MinutesLater.setMinutes(MinutesLater.getMinutes() + 7200); //Add 20 minutes time from now ( Adjust minutes here )
+      var countDownDate = MinutesLater.getTime();
+
+      // Update the count down every 1 second
+      var x = setInterval(function () {
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Format the time with two digits per hour/mins/sec's
+
+        daysString = days.toString().padStart(2, '0') + '<br/>Days';
+        hoursString = hours.toString().padStart(2, '0') + '<br/>Hours';
+        minutesString = minutes.toString().padStart(2, '0') + '<br/>Minutes';
+        secondsString = seconds.toString().padStart(2, '0') + '<br/>Seconds';
+
+        // Print the current time so far
+        document.getElementById('daysTxt').innerHTML = daysString;
+        document.getElementById('hoursTxt').innerHTML = hoursString;
+        document.getElementById('minutesTxt').innerHTML = minutesString;
+        document.getElementById('secondsTxt').innerHTML = secondsString;
+
+        // Check if countdown is complete & redirect
+        if (distance < 0) {
+          clearInterval(x);
+          window.top.location = 'https://disney.com';
+        }
+      }, 1000);
+    </script>
+
+    <div class="holder">
+      <div id="daysTxt">
+        <br />
+        Days
+      </div>
+
+      <div id="hoursTxt">
+        <br />
+        Hours
+      </div>
+      <div id="minutesTxt">
+        <br />
+        Minutes
+      </div>
+
+      <div id="secondsTxt">
+        <br />
+        Seconds
+      </div>
+      <br />
+    </div>
+  </body>
+</html>
