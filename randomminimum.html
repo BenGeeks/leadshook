@@ -1,26 +1,73 @@
-<h1 id="display_result"></h1>
-
-<script>
-  let display = document.getElementById('display_result');
-  let list = {
-    Time: 2,
-    Team: 2,
-    Sales: 2,
-    Mindset: 2,
-    Marketing: 2,
-  };
-
-  const getSmallest = (array) => {
-    let smallestValue = Number.MAX_VALUE;
-    let minArray = [];
-    for (let key in array) {
-      if (array[key] < smallestValue) {
-        smallestValue = array[key];
-      }
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('https://media.npr.org/assets/img/2018/04/04/gettyimages-937327264-0ffed8630d3555e1c7389d3af280fffec4bcf9ef.jpg');
     }
-    for (let key in array) array[key] === smallestValue && minArray.push(key);
-    return [minArray[Math.floor(Math.random() * minArray.length)], smallestValue];
-  };
-  const result = getSmallest(list);
-  display.innerHTML = `The lowest value is ${result[0]} from ${result[1]}`;
-</script>
+
+    .container {
+      background-color: salmon;
+      margin: 20px;
+      padding: 10px;
+      font-size: large;
+    }
+
+    .calc {
+      background-color: rgb(129, 236, 176);
+      border-radius: 3px;
+      text-align: center;
+      width: 150px;
+      padding: 5px;
+      box-shadow: 1px 1px 5px;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="display_result">The lowest value is...</h1>
+    <h4>Please select a number from 1 to 5</h4>
+    <div>Time: </div><input type="number" min="1" max="5" name="BenRandomTime" id="Time" /></br>
+    </br>
+    <div>Team: </div><input type="number" min="1" max="5" name="BenRandomTeam" id="Team"/></br>
+    </br>
+    <div>Sales: </div><input type="number" min="1" max="5" name="BenRandomSales" id="Sales"/></br>
+    </br>
+    <div>Mindset: </div><input type="number" min="1" max="5" name="BenRandomMindset" id="Mindset"/></br>
+    </br>
+    <div>Marketing: </div><input type="number" min="1" max="5" name="BenRandomMarketing" id="Marketing"/></br>
+    </br>
+    <div id="calculate" class="calc">Calculate</div>
+    </br>
+    </br>
+    <button type="submit" class="btn btn-success">Forward</button>
+  </div>
+
+  <script>
+    let calculate = document.getElementById('calculate');
+    
+    const getSmallest = () => {
+      let display = document.getElementById('display_result');
+      let Time = document.getElementById('Time').value;
+      let Team = document.getElementById('Team').value;
+      let Sales = document.getElementById('Sales').value;
+      let Mindset = document.getElementById('Mindset').value;
+      let Marketing = document.getElementById('Marketing').value;
+      let array = {Time, Team, Sales, Mindset, Marketing};
+      let smallestValue = Number.MAX_VALUE;
+      let minArray = [];
+      for (let key in array) {
+        if (array[key] < smallestValue) {
+          smallestValue = array[key];
+        }
+      }
+      for (let key in array) array[key] === smallestValue && minArray.push(key);
+      let result = [minArray[Math.floor(Math.random() * minArray.length)], smallestValue];
+      display.innerHTML = `The lowest value is ${result[0]} from ${result[1]}`;
+    };
+
+    calculate.addEventListener('click', getSmallest);
+  </script>
+</body>

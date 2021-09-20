@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Passing Data to LeadsHook</title>
+    <!-- <style>
+      body {
+        background-image: url('https://img-cdn.inc.com/image/upload/w_1920,h_1080,c_fill/images/panoramic/getty_1075599562_hpy86b.jpg');
+        margin: 0;
+        padding: 0;
+      }
+    </style> -->
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-P8HPF88');
+    </script>
+    <!-- End Google Tag Manager -->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-P8HPF88"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div
+      class="quiz-container"
+      style="text-align: center"
+      data-quiz="meCozlPI86DnepvQB6bq7D83bwt6aEiXHoHYAU69"
+      data-offset="0"
+      data-autoscroll="yes"
+    ></div>
+    <script src="https://test1.leadshook.io/s/js_embed"></script>
+
+    <!-- Ben set cookie code -->
+    <script>
+      function setCookie(name, value, days) {
+        var expires = '';
+        if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+          expires = '; expires=' + date.toUTCString();
+        }
+        document.cookie = name + '=' + (value || '') + expires + '; path=/';
+      }
+      setCookie('_creator', 'ben_geeks', 7);
+      setCookie('_fbp', 'fb.1.1624369180421.209276319', 7);
+      setCookie('_firstName', 'Kyle', 7);
+      setCookie('_lastName', 'Reese', 7);
+      setCookie('_source', 'Terminator', 7);
+    </script>
+
+    <script>
+      function getCookie(name) {
+        const value = document.cookie;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+      }
+
+      setTimeout(() => {
+        console.log('grabing cookie from site and passing to LeadsHook');
+        LH.setField('cookieFromSite_firstName', getCookie('_firstName'));
+        LH.setField('cookieFromSite_lastName', getCookie('_lastName'));
+        LH.setField('cookieFromSite_source', getCookie('_source'));
+        LH.setField('cookieFromSite_fbp', getCookie('_fbp'));
+      }, 1000);
+    </script>
+  </body>
+</html>
