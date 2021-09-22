@@ -1,29 +1,38 @@
 {
-  "data": [
+  "customFields": [
     {
-      "event_name": "LeadQuizLowQuality",
-      "event_time": 1630781595,
-      "action_source": "website",
-      "event_id": "491472_142068176_enter",
-      "event_source_url": "https://thegrowthlab.leadshook.io/survey/xwduL69yQmsseHi87BosLQMyAHzXZnQ7UQ3Y9Ufo",
-      "user_data": {
-        "client_user_agent": "Mozilla/5.0 (Linux; Android 11; SM-A715F Build/RP1A.200720.012; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/92.0.4515.159 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/334.0.0.32.119;]",
-        "client_ip_address": "94.109.114.115",
-        "fbc": "",
-        "fbp": "",
-        "em": "a51c958cff6393823311deb09e2c0f12bbd689b7ffe0aff52c6ee52a99cc649d",
-        "ph": "51375117ddacf29a1e9d12c3edba4d8e12d8def236e6ae806138caa363b66709",
-        "fn": "fa88de024364dbfcc278ce32fe7956ac7c2d058535f7ec9e8e017b8e3b77f805",
-        "ln": "215b2850c2700ec1027c7667dfdbeba0c0c2fa536e91c5f81f832529423329bc",
-        "country": "46599c5bb5c33101f80cea8438e2228085513dbbb19b2f5ce97bd68494d3344d",
-        "external_id": "4ea5c508a6566e76240543f8feb06fd457777be39549c4016436afda65d2330e"
-      },
-      "custom_data": {
-        "currency": "EUR",
-        "value": "0.00",
-        "content_name": "Rachat de crédit - embedded - v3",
-        "content_category": "Facebook ServerSide API (LeadQuizLowQuality)"
-      }
+      "id": "X4OwKNjAIIkCjmbfnyS6",
+      "name": "how much coverage1",
+      "fieldKey": "contact.how_much_coverage1",
+      "placeholder": "10000",
+      "dataType": "RADIO",
+      "position": 0,
+      "picklistOptions": ["5000", "10000", "15000", "20000", "25000"],
+      "isAllowedCustomOption": false
+    },
+    {
+      "id": "zuaCIaIrWRyVRlYSNK07",
+      "name": "year of birth",
+      "fieldKey": "contact.year_of_birth",
+      "placeholder": "1960",
+      "dataType": "TEXT",
+      "position": 0
+    },
+    {
+      "id": "VW5rZWyfB8SzxDz27p9D",
+      "name": "Already coverage",
+      "fieldKey": "contact.already_coverage",
+      "placeholder": "",
+      "dataType": "TEXT",
+      "position": 0
+    },
+    {
+      "id": "rtQNmQ2vnFzFJHcbAa39",
+      "name": "beneficiary",
+      "fieldKey": "contact.beneficiary",
+      "placeholder": "",
+      "dataType": "TEXT",
+      "position": 0
     }
   ]
 }
