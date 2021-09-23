@@ -11,7 +11,7 @@
       }
 
       function receiveMessage(message) {
-        console.log(message.data);
+        console.log(message.data.messageKey);
         if (message.data.messageKey === 'KyR0mpaWbmyUtWqWsnfWhvQ8yNEnH0EdV5A1LgqE') {
           console.log('Event from LeadsHook received: ', message.data.eventName);
           sendResponse(message.data.messageID);
