@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function sendResponse(messageID) {
+        event.source.postMessage(messageID, '*');
+      }
+
+      function receiveMessage(message) {
+        console.log(message.data);
+        if (message.data.messageKey === 'KyR0mpaWbmyUtWqWsnfWhvQ8yNEnH0EdV5A1LgqE') {
+          console.log('Event from LeadsHook received: ', message.data.eventName);
+          sendResponse(message.data.messageID);
+        }
+      }
+
+      window.addEventListener('message', receiveMessage, false);
+    </script>
+  </head>
+
+  <body>
+    <div
+      class="quiz-container"
+      style="text-align: center"
+      data-quiz="7laJ7cGl6vlRTIm7gRC2gnZghLA1YeIbO3V9pYsI"
+      data-offset="0"
+      data-autoscroll="yes"
+    ></div>
+    <script src="https://jeffrey.leadshook.com/s/js_embed"></script>
+  </body>
+</html>

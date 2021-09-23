@@ -119,6 +119,17 @@
   }, 1000);
 </script>
 
+<!-- Page View for Result Page-->
+<script>
+  let eventName = '{_c_identifier}' ? 'completed_{_c_identifier}' : 'completed';
+  ga4(eventName, {
+    eventID: '{_c_eventid}',
+    eventTime: '{_c_eventtime}',
+    nodeTitle: '{_c_node}',
+    nodeIdentifier: '{_c_identifier}',
+  });
+</script>
+
 <!-- GTM UA event listener -->
 <script>
   var dataLayer = window.dataLayer || (window.dataLayer = []);
