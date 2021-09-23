@@ -11,6 +11,7 @@
       }
 
       function receiveMessage(message) {
+        console.log('DATA: ', message.data);
         console.log('TOKEN: ', message.data.messageKey);
         if (message.data.messageKey === 'KyR0mpaWbmyUtWqWsnfWhvQ8yNEnH0EdV5A1LgqE') {
           console.log('Event from LeadsHook received: ', message.data.eventName);
