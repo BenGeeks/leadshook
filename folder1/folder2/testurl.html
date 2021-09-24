@@ -7,6 +7,7 @@
     <title>Document</title>
   </head>
   <body>
+    <a href="https://www.whiztesting.com/dino/">Cick Here</a>
     <div
       class="quiz-container"
       style="text-align: center"
@@ -15,9 +16,14 @@
       data-autoscroll="yes"
     ></div>
     <script src="https://test1.leadshook.io/s/js_embed"></script>
-    <script>
+    <!-- <script>
       let parentURL = window.location.href;
-      setTimeout(() => LH.setField('fullParentURL', parentURL), 1000);
-    </script>
+      let referrer = document.referrer;
+      console.log('Referrer: ', referrer);
+      setTimeout(() => {
+        LH.setField('fullParentURL', parentURL);
+        LH.setField('DinoReferrer', referrer);
+      }, 1000);
+    </script> -->
   </body>
 </html>
