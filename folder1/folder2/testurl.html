@@ -15,5 +15,10 @@
       data-autoscroll="yes"
     ></div>
     <script src="https://test1.leadshook.io/s/js_embed"></script>
+    <script>
+      let a = window.location.href;
+      console.log('Parent URL: '.a);
+      LH.setField('fullParentURL', a);
+    </script>
   </body>
 </html>
