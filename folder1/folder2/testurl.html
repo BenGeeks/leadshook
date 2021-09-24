@@ -17,7 +17,7 @@
     <script src="https://test1.leadshook.io/s/js_embed"></script>
     <script>
       let parentURL = window.location.href;
-      LH.setField('fullParentURL', parentURL);
+      setTimeout(() => LH.setField('fullParentURL', parentURL), 1000);
     </script>
   </body>
 </html>
