@@ -16,7 +16,8 @@
     ></div>
     <script src="https://test1.leadshook.io/s/js_embed"></script>
     <script>
-      LH.setField('fullParentURL', window.location.href);
+      let parentURL = window.location.href;
+      LH.setField('fullParentURL', parentURL);
     </script>
   </body>
 </html>
