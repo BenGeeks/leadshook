@@ -18,7 +18,7 @@
     <script>
       let parentURL = window.location.href;
       console.log('Parent URL: ', parentURL);
-      LH.setField('fullParentURL', parentURL);
+      setTimeout(() => LH.setField('fullParentURL', parentURL), 1000);
     </script>
   </body>
 </html>
