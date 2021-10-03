@@ -1,62 +1,106 @@
-<script>
-  let states = [
-    ['arizona', 'AZ'],
-    ['alabama', 'AL'],
-    ['alaska', 'AK'],
-    ['arkansas', 'AR'],
-    ['california', 'CA'],
-    ['colorado', 'CO'],
-    ['connecticut', 'CT'],
-    ['delaware', 'DE'],
-    ['florida', 'FL'],
-    ['georgia', 'GA'],
-    ['hawaii', 'HI'],
-    ['idaho', 'ID'],
-    ['illinois', 'IL'],
-    ['indiana', 'IN'],
-    ['iowa', 'IA'],
-    ['kansas', 'KS'],
-    ['kentucky', 'KY'],
-    ['louisiana', 'LA'],
-    ['maine', 'ME'],
-    ['maryland', 'MD'],
-    ['massachusetts', 'MA'],
-    ['michigan', 'MI'],
-    ['minnesota', 'MN'],
-    ['mississippi', 'MS'],
-    ['missouri', 'MO'],
-    ['montana', 'MT'],
-    ['nebraska', 'NE'],
-    ['nevada', 'NV'],
-    ['new hampshire', 'NH'],
-    ['new jersey', 'NJ'],
-    ['new mexico', 'NM'],
-    ['new york', 'NY'],
-    ['north carolina', 'NC'],
-    ['north dakota', 'ND'],
-    ['ohio', 'OH'],
-    ['oklahoma', 'OK'],
-    ['oregon', 'OR'],
-    ['pennsylvania', 'PA'],
-    ['rhode island', 'RI'],
-    ['south carolina', 'SC'],
-    ['south dakota', 'SD'],
-    ['tennessee', 'TN'],
-    ['texas', 'TX'],
-    ['utah', 'UT'],
-    ['vermont', 'VT'],
-    ['virginia', 'VA'],
-    ['washington', 'WA'],
-    ['west virginia', 'WV'],
-    ['wisconsin', 'WI'],
-    ['wyoming', 'WY'],
-  ];
-  let longState = '{BenLongState}';
-  for (i = 0; i < states.length; i++) {
-    if (states[i][0].toLowerCase() === longState.toLowerCase()) {
-      DT.setField('BenShortState', states[i][1]);
-      break;
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('https://media.npr.org/assets/img/2018/04/04/gettyimages-937327264-0ffed8630d3555e1c7389d3af280fffec4bcf9ef.jpg');
     }
-    DT.setField('BenShortState', 'Not Found');
-  }
-</script>
+    .main-container {
+      display: flex;
+      justify-content: center;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.7);
+      margin-top: 150px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 1px 5px 10px #333333;
+    }
+    .input-field {
+      margin-bottom: 10px;
+    }
+    .display-container {
+      background-color: white;
+      margin: 10px 0;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="card">
+      <label for="USstate">Please enter a US State:</label><br />
+      <input type="text" id="USstate" class="input-field" placeholder="New York" name="BenTestUSField" /><br />
+      <div id="btn" class="btn btn-success btn-block">Check State Short Code</div>
+      <div class="display-container">
+        <h1 id="shortName">{BenTestUSShortName}</h1>
+      </div>
+      <button class="btn btn-success btn-block" type="submit">Next</button>
+    </div>
+  </div>
+  <script>
+    let states = [
+      ['arizona', 'AZ'],
+      ['alabama', 'AL'],
+      ['alaska', 'AK'],
+      ['arkansas', 'AR'],
+      ['california', 'CA'],
+      ['colorado', 'CO'],
+      ['connecticut', 'CT'],
+      ['delaware', 'DE'],
+      ['florida', 'FL'],
+      ['georgia', 'GA'],
+      ['hawaii', 'HI'],
+      ['idaho', 'ID'],
+      ['illinois', 'IL'],
+      ['indiana', 'IN'],
+      ['iowa', 'IA'],
+      ['kansas', 'KS'],
+      ['kentucky', 'KY'],
+      ['louisiana', 'LA'],
+      ['maine', 'ME'],
+      ['maryland', 'MD'],
+      ['massachusetts', 'MA'],
+      ['michigan', 'MI'],
+      ['minnesota', 'MN'],
+      ['mississippi', 'MS'],
+      ['missouri', 'MO'],
+      ['montana', 'MT'],
+      ['nebraska', 'NE'],
+      ['nevada', 'NV'],
+      ['new hampshire', 'NH'],
+      ['new jersey', 'NJ'],
+      ['new mexico', 'NM'],
+      ['new york', 'NY'],
+      ['north carolina', 'NC'],
+      ['north dakota', 'ND'],
+      ['ohio', 'OH'],
+      ['oklahoma', 'OK'],
+      ['oregon', 'OR'],
+      ['pennsylvania', 'PA'],
+      ['rhode island', 'RI'],
+      ['south carolina', 'SC'],
+      ['south dakota', 'SD'],
+      ['tennessee', 'TN'],
+      ['texas', 'TX'],
+      ['utah', 'UT'],
+      ['vermont', 'VT'],
+      ['virginia', 'VA'],
+      ['washington', 'WA'],
+      ['west virginia', 'WV'],
+      ['wisconsin', 'WI'],
+      ['wyoming', 'WY'],
+    ];
+    let longState = '{BenLongState}';
+    for (i = 0; i < states.length; i++) {
+      if (states[i][0].toLowerCase() === longState.toLowerCase()) {
+        DT.setField('BenShortState', states[i][1]);
+        break;
+      }
+      DT.setField('BenShortState', 'Not Found');
+    }
+  </script>
+</body>
