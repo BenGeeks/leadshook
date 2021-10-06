@@ -70,4 +70,19 @@
 
     calculate.addEventListener('click', getSmallest);
   </script>
+  <script>
+    let buyer1 = 4;
+    let buyer2 = 6;
+    let buyer3 = 8;
+    let array = {buyer1, buyer2, buyer3};
+    let maxVal = 0;
+    let highest;
+    for (let key in array) {
+      if (array[key] > maxVal) {
+        highest = key;
+        maxVal = array[key];
+      }
+    } 
+    console.log(highest);
+  </script>
 </body>

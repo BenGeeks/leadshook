@@ -1,0 +1,26 @@
+<script>
+  var i = setInterval(t, 300);
+  function t() {
+    window.onscroll = function () {
+      sc();
+    };
+  }
+  function s() {
+    clearInterval(i);
+  }
+  function sc() {
+    window.scrollTo(0, 0);
+  }
+  function es() {
+    return !0;
+  }
+  document.body.addEventListener('DOMNodeInserted', function (n) {
+    'IFRAME' == n.target.tagName &&
+      (document.querySelector('.quiz-container iframe').onload = function () {
+        s(),
+          (window.onscroll = function () {
+            es();
+          });
+      });
+  });
+</script>
