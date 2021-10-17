@@ -1,38 +1,29 @@
 {
-  "customFields": [
-    {
-      "id": "X4OwKNjAIIkCjmbfnyS6",
-      "name": "how much coverage1",
-      "fieldKey": "contact.how_much_coverage1",
-      "placeholder": "10000",
-      "dataType": "RADIO",
-      "position": 0,
-      "picklistOptions": ["5000", "10000", "15000", "20000", "25000"],
-      "isAllowedCustomOption": false
-    },
-    {
-      "id": "zuaCIaIrWRyVRlYSNK07",
-      "name": "year of birth",
-      "fieldKey": "contact.year_of_birth",
-      "placeholder": "1960",
-      "dataType": "TEXT",
-      "position": 0
-    },
-    {
-      "id": "VW5rZWyfB8SzxDz27p9D",
-      "name": "Already coverage",
-      "fieldKey": "contact.already_coverage",
-      "placeholder": "",
-      "dataType": "TEXT",
-      "position": 0
-    },
-    {
-      "id": "rtQNmQ2vnFzFJHcbAa39",
-      "name": "beneficiary",
-      "fieldKey": "contact.beneficiary",
-      "placeholder": "",
-      "dataType": "TEXT",
-      "position": 0
-    }
-  ]
-}
+  "key": "a369c52a1bea5e68eb46115107f006a8",
+  "lead": {
+  "campid": "DEBT1",
+  "sid": "1",
+  "ssid": "{ssid}",
+  "c1": "c1",
+  "c2": "c2",
+  "c3": "{click_id}",
+  "email": "{email}",
+  "testmode":"{lb_testmode}",
+  "firstname": "{first_name|raw}",
+  "lastname": "{last_name|raw}",
+  "towncity": "{city|raw}",
+  "county": "{province}",
+  "postcode": "{postalcode}",
+  "phone1": "{phone}",
+  "ipaddress": "{ip_address}",
+  "optinurl": "https://digital-hopr.leadshook.io/",
+  "debt_type": "{debt_type}",
+  "debt_owed_amount": "{debt_owed_amount}",
+  "behind_payments": "{behind_payments}",
+  "employment_status": "{employment_status}",
+  "own_home": "{own_home}",
+  "home_worth": "{home_worth}",
+  "mortgage_amount": "{mortgage_amount}",
+  "postalcode_raw": "{postalcode_raw}"
+  }
+  

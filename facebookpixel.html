@@ -1,0 +1,86 @@
+<script>
+  (function check_fbq() {
+    if (typeof fbq === 'undefined') setTimeout(check_fbq, 100);
+    DT.grabCookie('fbp', '_fbp');
+    console.log('fbp function fired [value: ' + getCookie('_fbp') + ']');
+  })();
+
+  (function check_fbq() {
+    if (typeof fbq === 'undefined') setTimeout(check_fbq, 100);
+    DT.grabCookie('fbp', '_fbp');
+    console.log('fbp function fired [value: ' + getCookie('_fbp') + ']');
+  })();
+
+  DT.setField('eventid_fb', '{_c_eventid}');
+  DT.setField('eventtime_fb', '{_c_eventtime}');
+
+  try {
+    setTimeout(function () {
+      var scope = $('.app').scope();
+      scope.next();
+    }, 500);
+  } catch (e) {
+    console.log(e.message);
+  }
+</script>
+
+<script>
+  DT.setField('eventid_fb', '{_c_eventid}');
+  DT.setField('eventtime_fb', '{_c_eventtime}');
+</script>
+
+<script>
+  fbq('track', 'ViewContent', {
+    content_name: '{_c_dt}',
+    content_category: '{_c_node}',
+    content_ids: ['{_c_question}'],
+    content_type: '{_c_answer}',
+  });
+</script>
+
+<script>
+  fbq(
+    'track',
+    'ViewContent',
+    {
+      content_name: '{_c_dt}',
+      content_category: '{_c_node}',
+      content_ids: ['{_c_question}'],
+      content_type: '{_c_answer}',
+    },
+    { eventID: '{eventid_fb}' }
+  );
+</script>
+
+<!-- Server side json payload
+{
+  "data": [
+      {
+          "event_name": "Lead",
+          "event_time": {eventtime_fb},
+          "action_source": "LeadsHook",
+          "event_id": "{eventid_fb}",
+          "event_source_url": "{_c_eventurl}",
+          "user_data": {
+              "client_user_agent": "{_c_useragent}",
+              "client_ip_address": "{ip_address}",
+              "fbc": "{fbc}",
+              "fbp": "{fbp}",
+              "external_id": "{lead_id|sha256}"
+          },
+          "custom_data": {
+              "debt_type": "{debt_type}",
+              "behind_payments": "{behind_payments}",
+              "debt_owed_amount": "{debt_owed_amount}",
+              "home_worth": "{home_worth}",
+              "property_type": "{property_type}",
+              "mortgage_amount": "{mortgage_amount}",
+              "Debt_Owed": "{75_Debt_Owed}",
+              "employment_status": "{employment_status}",
+              "New_Debt_Amt": "{New_Debt_Amt}",
+              "own_home": "{own_home}"
+          }
+      }
+  ]
+}
+Server side json payload -->

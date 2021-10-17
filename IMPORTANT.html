@@ -124,7 +124,7 @@
 
 <!-- Page View for Result Page-->
 <script>
-  let eventName = '{_c_identifier}' ? 'completed_{_c_identifier}' : 'completed';
+  let eventName = '{_c_identifier}' ? 'reached_{_c_identifier}' : 'reached_result_page';
   ga4(eventName, {
     eventID: '{_c_eventid}',
     eventTime: '{_c_eventtime}',
@@ -136,70 +136,103 @@
 <!-- GTM UA event listener -->
 <script>
   var dataLayer = window.dataLayer || (window.dataLayer = []);
-
-  function sendResponse(messageID) {
-    event.source.postMessage(messageID, '*');
-  }
+  var messages = [];
 
   function receiveMessage(message) {
-    if (message.data.messageKey === 'ZR4wUggoGkXjRqlcTrYKFFXpNGyVcXJwmYl0aBw3') {
-      sendResponse(message.data.messageID);
+    if (message.data.messageID) {
+      event.source.postMessage(message.data.messageID, '*');
+      console.log(message.data.eventData);
 
-      if (message.data.eventName.includes('first_visit')) {
-        dataLayer.push({
-          event: 'LH First Visit',
-          LH_data: {
-            category: 'LH_first_visit',
-            action: 'LH_leadID_' + message.data.eventData.leadInfo.leadID,
-            label: 'LH_leadToken_' + message.data.eventData.leadInfo.leadToken,
-            value: '',
-            eventTime: message.data.eventData.eventInfo.eventTime,
-            eventID: message.data.eventData.eventInfo.eventID,
-          },
-        });
-      }
+      if (message.data.messageKey === 'ZR4wUggoGkXjRqlcTrYKFFXpNGyVcXJwmYl0aBw3') {
+        if (!messages.includes(message.data.messageID)) {
+          if (message.data.eventName.includes('first_visit')) {
+            dataLayer.push({
+              event: 'LH First Visit',
+              LH_data: {
+                category: 'LH_' + message.data.eventName,
+                action: 'LH_leadID_' + message.data.eventData.leadInfo.leadID,
+                label: 'LH_leadToken_' + message.data.eventData.leadInfo.leadToken,
+                value: '',
+                eventTime: message.data.eventData.eventInfo.eventTime,
+                eventID: message.data.eventData.eventInfo.eventID,
+              },
+            });
+          }
 
-      if (message.data.eventName.includes('view')) {
-        dataLayer.push({
-          event: 'LH Page View',
-          LH_data: {
-            category: 'LH_page_view',
-            action: message.data.eventData.nodeTitle,
-            label: message.data.eventData.nodeIdentifier,
-            value: '',
-            eventTime: message.data.eventData.eventTime,
-            eventID: message.data.eventData.eventID,
-          },
-        });
-      }
+          if (message.data.eventName.includes('started')) {
+            dataLayer.push({
+              event: 'LH Started Decision Tree',
+              LH_data: {
+                category: 'LH_' + message.data.eventName,
+                action: message.data.eventData.decisionTree,
+                label: message.data.eventData.nodeTitle,
+                value: message.data.eventData.nodeIdentifier,
+                eventTime: message.data.eventData.eventTime,
+                eventID: message.data.eventData.eventID,
+              },
+            });
+          }
 
-      if (message.data.eventName.includes('q&a')) {
-        dataLayer.push({
-          event: 'LH Q&A Event',
-          LH_data: {
-            category: 'LH_q&a_engagement',
-            action: message.data.eventData.nodeTitle,
-            label: message.data.eventData.eventQuestion,
-            value: message.data.eventData.eventAnswer,
-            eventTime: message.data.eventData.eventTime,
-            eventID: message.data.eventData.eventID,
-          },
-        });
-      }
+          if (message.data.eventName.includes('view')) {
+            dataLayer.push({
+              event: 'LH Page View',
+              LH_data: {
+                category: 'LH_' + message.data.eventName,
+                action: message.data.eventData.nodeTitle,
+                label: message.data.eventData.nodeIdentifier,
+                value: '',
+                eventTime: message.data.eventData.eventTime,
+                eventID: message.data.eventData.eventID,
+              },
+            });
+          }
 
-      if (message.data.eventName.includes('form')) {
-        dataLayer.push({
-          event: 'LH Form Event',
-          LH_data: {
-            category: 'LH_form_engagement',
-            action: message.data.eventData.nodeTitle,
-            label: message.data.eventName,
-            value: message.data.eventData.formData,
-            eventTime: message.data.eventData.eventTime,
-            eventID: message.data.eventData.eventID,
-          },
-        });
+          if (message.data.eventName.includes('q&a')) {
+            dataLayer.push({
+              event: 'LH Q&A Event',
+              LH_data: {
+                category: 'LH_' + message.data.eventName,
+                action: message.data.eventData.nodeTitle,
+                label: message.data.eventData.eventQuestion,
+                value: message.data.eventData.eventAnswer,
+                eventTime: message.data.eventData.eventTime,
+                eventID: message.data.eventData.eventID,
+              },
+            });
+          }
+
+          if (message.data.eventName.includes('form')) {
+            dataLayer.push({
+              event: 'LH Form Event',
+              LH_data: {
+                category: 'LH_' + message.data.eventName,
+                action: message.data.eventData.nodeTitle,
+                label: message.data.eventName,
+                value: message.data.eventData.formData,
+                eventTime: message.data.eventData.eventTime,
+                eventID: message.data.eventData.eventID,
+              },
+            });
+          }
+
+          if (message.data.eventName.includes('reached')) {
+            dataLayer.push({
+              event: 'LH Reached Results Page',
+              LH_data: {
+                category: 'LH_' + message.data.eventName,
+                action: message.data.eventData.decisionTree,
+                label: message.data.eventData.nodeTitle,
+                value: message.data.eventData.nodeIdentifier,
+                eventTime: message.data.eventData.eventTime,
+                eventID: message.data.eventData.eventID,
+              },
+            });
+          }
+        }
+      } else {
+        console.log('LeadsHook token not matched!!!');
       }
+      messages.push(message.data.messageID);
     }
   }
 
@@ -249,7 +282,7 @@
 
 <!-- On Exit of Start Page-->
 <script>
-  let eventName = '{_c_identifier}' ? 'started_{_c_identifier}' : 'started_survey';
+  let eventName = '{_c_identifier}' ? 'started_{_c_identifier}' : 'started_decision_tree';
   ga4(eventName, {
     eventID: '{_c_eventid}',
     eventTime: '{_c_eventtime}',
@@ -287,3 +320,141 @@ Completed Survey - This event only triggers on enter of a Result Page.
   }
   window.addEventListener('message', receiveMessage, false);
 </script>
+
+<!-- Facebook Pixel Code -->
+<script>
+  !(function (f, b, e, v, n, t, s) {
+    if (f.fbq) return;
+    n = f.fbq = function () {
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+    };
+    if (!f._fbq) f._fbq = n;
+    n.push = n;
+    n.loaded = !0;
+    n.version = '2.0';
+    n.queue = [];
+    t = b.createElement(e);
+    t.async = !0;
+    t.src = v;
+    s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s);
+  })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '472603423564158');
+  fbq('track', 'PageView');
+  fbq('track', 'ViewContent');
+</script>
+<noscript
+  ><img
+    height="1"
+    width="1"
+    style="display: none"
+    src="https://www.facebook.com/tr?id=472603423564158&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+<!-- GTM Pixel Listener -->
+<script>
+  var dataLayer = window.dataLayer || (window.dataLayer = []);
+  var messages = [];
+
+  function receiveMessage(message) {
+    if (message.data.messageID) {
+      event.source.postMessage(message.data.messageID, '*');
+      console.log(message.data.eventData);
+
+      if (message.data.messageKey === 'ZR4wUggoGkXjRqlcTrYKFFXpNGyVcXJwmYl0aBw3') {
+        if (!messages.includes(message.data.messageID)) {
+          if (message.data.eventName.includes('first_visit')) {
+            fbq(
+              'track',
+              'ViewContent',
+              {
+                content_name: '{_c_dt}',
+                content_category: '{_c_node}',
+                content_ids: ['{_c_question}'],
+                content_type: '{_c_answer}',
+              },
+              { eventID: '{eventid_fb}' }
+            );
+          }
+
+          if (message.data.eventName.includes('started')) {
+            fbq(
+              'track',
+              'ViewContent',
+              {
+                content_name: '{_c_dt}',
+                content_category: '{_c_node}',
+                content_ids: ['{_c_question}'],
+                content_type: '{_c_answer}',
+              },
+              { eventID: '{eventid_fb}' }
+            );
+          }
+
+          if (message.data.eventName.includes('view')) {
+            fbq(
+              'track',
+              'ViewContent',
+              {
+                content_name: '{_c_dt}',
+                content_category: '{_c_node}',
+                content_ids: ['{_c_question}'],
+                content_type: '{_c_answer}',
+              },
+              { eventID: '{eventid_fb}' }
+            );
+          }
+
+          if (message.data.eventName.includes('q&a')) {
+            fbq(
+              'track',
+              'ViewContent',
+              {
+                content_name: '{_c_dt}',
+                content_category: '{_c_node}',
+                content_ids: ['{_c_question}'],
+                content_type: '{_c_answer}',
+              },
+              { eventID: '{eventid_fb}' }
+            );
+          }
+
+          if (message.data.eventName.includes('form')) {
+            fbq(
+              'track',
+              'ViewContent',
+              {
+                content_name: '{_c_dt}',
+                content_category: '{_c_node}',
+                content_ids: ['{_c_question}'],
+                content_type: '{_c_answer}',
+              },
+              { eventID: '{eventid_fb}' }
+            );
+          }
+
+          if (message.data.eventName.includes('reached')) {
+            fbq(
+              'track',
+              'CompleteRegistration',
+              {
+                content_name: '{_c_dt}',
+                content_category: '{_c_node}',
+                content_ids: ['{_c_question}'],
+                content_type: '{_c_answer}',
+              },
+              { eventID: '{eventid_fb}' }
+            );
+          }
+        }
+      } else {
+        console.log('LeadsHook token not matched!!!');
+      }
+      messages.push(message.data.messageID);
+    }
+  }
+
+  window.addEventListener('message', receiveMessage, false);
+</script>
+<!-- End GTM Pixel Listener -->
