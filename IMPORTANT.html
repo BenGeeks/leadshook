@@ -369,12 +369,12 @@ Completed Survey - This event only triggers on enter of a Result Page.
               'track',
               'ViewContent',
               {
-                content_name: '{_c_dt}',
-                content_category: '{_c_node}',
-                content_ids: ['{_c_question}'],
-                content_type: '{_c_answer}',
+                content_name: message.data.eventData.decisionTreeInfo.decisionTree,
+                content_category: 'LH_first_visit',
+                content_ids: ['LH_leadID_' + message.data.eventData.leadInfo.leadID],
+                content_type: 'LH_leadToken_' + message.data.eventData.leadInfo.leadToken,
               },
-              { eventID: '{eventid_fb}' }
+              { eventID: message.data.eventData.eventInfo.eventID }
             );
           }
 
@@ -383,12 +383,12 @@ Completed Survey - This event only triggers on enter of a Result Page.
               'track',
               'ViewContent',
               {
-                content_name: '{_c_dt}',
-                content_category: '{_c_node}',
-                content_ids: ['{_c_question}'],
+                content_name: message.data.eventData.nodeTitle,
+                content_category: 'LH_page_view',
+                content_ids: [message.data.eventData.nodeIdentifier],
                 content_type: '{_c_answer}',
               },
-              { eventID: '{eventid_fb}' }
+              { eventID: message.data.eventData.eventID }
             );
           }
 
@@ -425,8 +425,8 @@ Completed Survey - This event only triggers on enter of a Result Page.
               'track',
               'ViewContent',
               {
-                content_name: '{_c_dt}',
-                content_category: '{_c_node}',
+                content_name: 'LH Form Event',
+                content_category: 'LH_' + message.data.eventName,
                 content_ids: ['{_c_question}'],
                 content_type: '{_c_answer}',
               },
@@ -439,12 +439,11 @@ Completed Survey - This event only triggers on enter of a Result Page.
               'track',
               'CompleteRegistration',
               {
-                content_name: '{_c_dt}',
-                content_category: '{_c_node}',
-                content_ids: ['{_c_question}'],
-                content_type: '{_c_answer}',
+                content_name: 'LH Reached Results Page',
+                content_category: 'LH_' + message.data.eventName,
+                content_type: message.data.eventData.nodeIdentifier,
               },
-              { eventID: '{eventid_fb}' }
+              { eventID: message.data.eventData.eventID }
             );
           }
         }
@@ -458,3 +457,99 @@ Completed Survey - This event only triggers on enter of a Result Page.
   window.addEventListener('message', receiveMessage, false);
 </script>
 <!-- End GTM Pixel Listener -->
+
+<script>
+  // version 0.20211019
+  var dataLayer = window.dataLayer || (window.dataLayer = []);
+  var tokens = 'LH_token'.split(', ');
+  var messages = [];
+
+  function receiveMessage(message) {
+    if (message.data.messageID) {
+      event.source.postMessage(message.data.messageID, '*');
+      if (tokens.includes(message.data.messageKey)) {
+        if (!messages.includes(message.data.messageID)) {
+          if (message.data.eventName === 'first_visit') {
+            dataLayer.push({
+              event: 'LH_' + message.data.eventData.decisionTreeInfo.decisionTree,
+              leadsHookData: message.data.eventData,
+            });
+          } else {
+            dataLayer.push({
+              event: 'LH_' + message.data.eventName,
+              leadsHookData: message.data.eventData,
+            });
+          }
+        }
+      } else {
+        console.log('LeadsHook token not matched!!!');
+      }
+
+      messages.push(message.data.messageID);
+    }
+  }
+
+  window.addEventListener('message', receiveMessage, false);
+</script>
+
+<!-- <script>
+  // version 0.20211019
+  console.log('Event Name: ', {{Event}});
+  if ({{Event}}.includes('_view')) {
+    fbq( 'track','ViewContent', {
+      content_name: {{LH_node_title}},
+      content_category: {{Event}}
+      },
+      { eventID: {{LH_eventID}} }
+    );
+  };
+  
+  if ({{Event}}.includes('_reached')) {
+    fbq( 'track','CompleteRegistration', {
+      content_name: {{LH_node_title}},
+      content_category: {{Event}}
+      },
+      { eventID: {{LH_eventID}} }
+    );
+  };
+  
+  if ({{Event}}.includes('_q&a')) {
+    fbq( 'track','SubmitApplication', {
+      content_name: {{LH_node_title}},
+      content_category: {{Event}},
+      content_question: {{LH_question}},
+      content_answer: {{LH_answer}}
+      },
+      { eventID: {{LH_eventID}} }
+    );
+  };
+  
+  if ({{Event}}.includes('_form')) {
+    if ({{LH_email}} || {{LH_first_name}} || {{LH_last_name}} || {{LH_phone}}) {
+      fbq( 'track','Lead', 
+        {
+          content_name: {{LH_node_title}},
+          content_category: {{Event}},
+          content_form_data: JSON.stringify({{LH_form_data}}),
+          user_data: {
+            fn: {{LH_first_name}},
+            ln: {{LH_last_name}},
+            em: {{LH_email}},
+            ph: {{LH_phone}}
+          }
+        },
+        { eventID: {{LH_eventID}} }
+      );
+    } else {
+      fbq( 'track','SubmitApplication', 
+        {
+          content_name: {{LH_node_title}},
+          content_category: {{Event}},
+          content_form_data: JSON.stringify({{LH_form_data}})
+        },
+        { eventID: {{LH_eventID}} }
+      );
+    }
+  };
+  
+</script> -->
