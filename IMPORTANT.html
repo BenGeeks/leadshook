@@ -553,3 +553,89 @@ Completed Survey - This event only triggers on enter of a Result Page.
   };
   
 </script> -->
+
+<script>
+  // version 0.20211027
+  var dataLayer = window.dataLayer || (window.dataLayer = []);
+  var tokens = {{LH_token}}.split(', ');
+  var messages = [];
+
+  function receiveMessage(message) {
+    if (message.data.messageID) {
+      event.source.postMessage(message.data.messageID, '*');
+      if (tokens.includes(message.data.messageKey)) {
+        if (!messages.includes(message.data.messageID)) {
+          if (message.data.eventName === 'first_visit') {
+              if (message.data.eventData.decisionTreeInfo.identifier) {
+                  var eventName = 'LH_first_visit_' + message.data.eventData.decisionTreeInfo.identifier;
+                  console.log('Event Name: ', eventName);
+                  dataLayer.push({
+                      event: eventName,
+                      leadsHookData: message.data.eventData
+                  });
+              } else {
+                  var eventName = 'LH_first_visit_' + message.data.eventData.decisionTreeInfo.decisionTree;
+                  console.log('Event Name: ', eventName);
+                  dataLayer.push({
+                      event: eventName,
+                      leadsHookData: message.data.eventData
+                  });
+              }
+          } else {
+              dataLayer.push({
+                event: 'LH_' + message.data.eventName,
+                leadsHookData: message.data.eventData });
+          }
+
+        }
+      } else { console.log('LeadsHook token not matched!!!') }
+
+      messages.push(message.data.messageID);
+    }
+  }
+
+  window.addEventListener('message', receiveMessage, false);
+</script>
+
+<script>
+  // version 0.20211102
+  var dataLayer = window.dataLayer || (window.dataLayer = []);
+  var tokens = {{LH_token}}.split(', ');
+  var messages = [];
+
+  function receiveMessage(message) {
+    if (message.data.messageID) {
+      event.source.postMessage(message.data.messageID, '*');
+      if (tokens.includes(message.data.messageKey)) {
+        if (!messages.includes(message.data.messageID)) {
+          if (message.data.eventName === 'first_visit') {
+              if (message.data.eventData.decisionTreeInfo.identifier) {
+                  dataLayer.push({
+                      event: 'LH_first_visit_' + message.data.eventData.decisionTreeInfo.identifier,
+                      leadsHookData: message.data.eventData,
+                      incomingToken: message.data.messageKey
+                  });
+              } else {
+                  dataLayer.push({
+                      event: 'LH_first_visit_' + message.data.eventData.decisionTreeInfo.decisionTree,
+                      leadsHookData: message.data.eventData,
+                      incomingToken: message.data.messageKey
+                  });
+              }
+          } else {
+              dataLayer.push({
+                event: 'LH_' + message.data.eventName,
+                leadsHookData: message.data.eventData,
+                incomingToken: message.data.messageKey
+              });
+          }
+
+        }
+      } else { console.log('LeadsHook token not matched!!!') }
+
+      messages.push(message.data.messageID);
+    }
+  }
+
+  window.addEventListener('message', receiveMessage, false);
+</script>
