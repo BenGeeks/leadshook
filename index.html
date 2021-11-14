@@ -50,5 +50,18 @@
       data-autoscroll="yes"
     ></div>
     <script src="https://test1.leadshook.com/s/js_embed"></script>
+
+    <p id="address_not_found" style="text-align: center; cursor: pointer">Click here if you can't find your address</p>
+    <script>
+      setTimeout(() => {
+        let btn = document.getElementById('address_not_found');
+        let scope = $('.app').scope();
+        btn.addEventListener('click', () => {
+          console.log('button has been clicked');
+          DT.setField('pass_g_maps_api', 'true');
+          scope.next();
+        });
+      }, 1000);
+    </script>
   </body>
 </html>
