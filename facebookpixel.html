@@ -52,6 +52,35 @@
   );
 </script>
 
+<script>
+  setTimeout(() => {
+    console.log('Page ID: ', window.ub.page.id);
+    LH.setField('ub_pageid', window.ub.page.id);
+    LH.setField('ub_variantid', window.ub.page.variantId);
+  }, 1000);
+</script>
+
+<script>
+  var loop1 = setInterval(getPageId, 500);
+  var loop2 = setInterval(getVariantId, 500);
+
+  function getPageId() {
+    var page_id = window.ub.page.id;
+    if (page_id) {
+      LH.setField('ub_pageid', page_id);
+      clearInterval(loop1);
+    }
+  }
+
+  function getVariantId() {
+    var variant_id = window.ub.page.variantId;
+    if (variant_id) {
+      LH.setField('ub_variantid', variant_id);
+      clearInterval(loop2);
+    }
+  }
+</script>
+
 <!-- Server side json payload
 {
   "data": [
