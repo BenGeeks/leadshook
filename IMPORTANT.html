@@ -639,3 +639,133 @@ Completed Survey - This event only triggers on enter of a Result Page.
 
   window.addEventListener('message', receiveMessage, false);
 </script>
+
+<script>
+  // version 0.20211019
+  console.log('Event Name: ', {{Event}});
+  if ({{Event}}.includes('_view')) {
+    fbq( 'track','ViewContent', {
+      content_name: {{LH_node_title}},
+      content_category: {{Event}}
+      },
+      { eventID: {{LH_eventID}} }
+    );
+  };
+
+  if ({{Event}}.includes('_reached')) {
+    fbq( 'track','CompleteRegistration', {
+      content_name: {{LH_node_title}},
+      content_category: {{Event}}
+      },
+      { eventID: {{LH_eventID}} }
+    );
+  };
+
+  if ({{Event}}.includes('_q&a')) {
+    fbq( 'track','SubmitApplication', {
+      content_name: {{LH_node_title}},
+      content_category: {{Event}},
+      content_question: {{LH_question}},
+      content_answer: {{LH_answer}}
+      },
+      { eventID: {{LH_eventID}} }
+    );
+  };
+
+  if ({{Event}}.includes('_form')) {
+    if ({{LH_email}} || {{LH_first_name}} || {{LH_last_name}} || {{LH_phone}}) {
+      fbq( 'track','Lead',
+        {
+          content_name: {{LH_node_title}},
+          content_category: {{Event}},
+          content_form_data: JSON.stringify({{LH_form_data}}),
+          user_data: {
+            fn: {{LH_first_name}},
+            ln: {{LH_last_name}},
+            em: {{LH_email}},
+            ph: {{LH_phone}}
+          }
+        },
+        { eventID: {{LH_eventID}} }
+      );
+    } else {
+      fbq( 'track','SubmitApplication',
+        {
+          content_name: {{LH_node_title}},
+          content_category: {{Event}},
+          content_form_data: JSON.stringify({{LH_form_data}})
+        },
+        { eventID: {{LH_eventID}} }
+      );
+    }
+  };
+</script>
+
+<script>
+  // version 0.20211114
+  console.log('Event Name: ', {{Event}});
+  if ({{Event}}.includes('_view')) {
+    fbq( 'track','ViewContent', {
+      content_name: {{LH_node_title}},
+      content_category: {{Event}}
+      },
+      { eventID: {{LH_eventID}} }
+    );
+  } else if ({{Event}}.includes('_reached')) {
+    fbq( 'track','CompleteRegistration', {
+      content_name: {{LH_node_title}},
+      content_category: {{Event}}
+      },
+      { eventID: {{LH_eventID}} }
+    );
+  } else if ({{Event}}.includes('_q&a')) {
+    fbq( 'track','SubmitApplication', {
+      content_name: {{LH_node_title}},
+      content_category: {{Event}},
+      content_question: {{LH_question}},
+      content_answer: {{LH_answer}}
+      },
+      { eventID: {{LH_eventID}} }
+    );
+  } else if ({{Event}}.includes('_form')) {
+    if ({{LH_email}} || {{LH_first_name}} || {{LH_last_name}} || {{LH_phone}}) {
+      fbq( 'track','Lead',
+        {
+          content_name: {{LH_node_title}},
+          content_category: {{Event}},
+          content_form_data: JSON.stringify({{LH_form_data}}),
+          user_data: {
+            fn: {{LH_first_name}},
+            ln: {{LH_last_name}},
+            em: {{LH_email}},
+            ph: {{LH_phone}}
+          }
+        },
+        { eventID: {{LH_eventID}} }
+      );
+    } else {
+      fbq( 'track','SubmitApplication',
+        {
+          content_name: {{LH_node_title}},
+          content_category: {{Event}},
+          content_form_data: JSON.stringify({{LH_form_data}})
+        },
+        { eventID: {{LH_eventID}} }
+      );
+    }
+  } else if ({{Event}}.includes('_started')) {
+    fbq( 'track','ViewContent', {
+      content_name: {{LH_dt_name}},
+      content_category: {{Event}}
+      },
+      { eventID: {{LH_eventID}} }
+    );
+  } else {
+    fbq( 'track','ViewContent', {
+      content_name: {{LH_dt_name}},
+      content_category: {{Event}}
+      },
+      { eventID: {{LH_eventID}} }
+    );
+  }
+</script>
