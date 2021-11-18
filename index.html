@@ -5,63 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
     <title>GA4 Push Test Beta</title>
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', 'GTM-MQ3J9SS');
-    </script>
-    <!-- End Google Tag Manager -->
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', 'GTM-W9ZKRJP');
-    </script>
-    <!-- End Google Tag Manager -->
   </head>
   <body>
-    <div
-      class="quiz-container"
-      style="text-align: center"
-      data-quiz="RINs5GpjZ1CSLE9r73sQjIrHyuTznGLX5JvzCA8y"
-      data-offset="0"
-      data-autoscroll="yes"
-    ></div>
-    <div
-      class="quiz-container"
-      style="text-align: center"
-      data-quiz="wpAnOyM9ibqBwy8X21oDsNkOs4HYfb0vN7et7Fnx"
-      data-offset="0"
-      data-autoscroll="yes"
-    ></div>
-    <script src="https://test1.leadshook.com/s/js_embed"></script>
-
-    <p id="address_not_found" style="text-align: center; cursor: pointer">Click here if you can't find your address</p>
     <script>
-      setTimeout(() => {
-        let btn = document.getElementById('address_not_found');
-        let scope = $('.app').scope();
-        btn.addEventListener('click', () => {
-          console.log('button has been clicked');
-          DT.setField('pass_g_maps_api', 'true');
-          scope.next();
-        });
-      }, 1000);
+      function showPopup() {
+        document.body.classList.toggle('show-dt');
+      }
+      function hidePopup() {
+        document.body.classList.toggle('show-dt');
+      }
     </script>
+
+    <button id="dt-popup-btn" onclick="showPopup()" ontouchstart="showPopup()">Show Decision Tree</button>
+    <div id="dt-popup">
+      <div class="dt-popup-dialog" role="document">
+        <div class="dt-popup-content">
+          <span class="dt-close" onclick="hidePopup()">x</span>
+          <div
+            class="quiz-container"
+            style="text-align: center"
+            data-quiz="G6nyuqFughSPNfq0wNg8wy2YGnjj3lZ4WbHg4y8H"
+            data-offset="0"
+            data-autoscroll="yes"
+          ></div>
+          <script src="https://test1.leadshook.io/s/js_embed"></script>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
